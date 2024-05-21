@@ -1,0 +1,77 @@
+<!-- templates/student/home.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Import Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .messages {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .messages ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .messages li {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .messages li.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .messages li.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Home Page</h1>
+
+    <!-- Import Students Form -->
+    <form method="post" action="{% url 'import_students' %}">
+        {% csrf_token %}
+        <button type="submit">Import Students</button>
+    </form>
+
+    {% if messages %}
+        <div class="messages">
+            <ul>
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
